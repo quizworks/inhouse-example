@@ -16,7 +16,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
+    'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
 
     /*
      * Configure basic information about the application.
@@ -75,7 +75,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT'),
+        'salt' => env('SECURITY_SALT', 'b48e179b379a6226919839a45620f67be3394e90e29c560fe904634ee902d13d'),
     ],
 
     /*
@@ -169,14 +169,14 @@ return [
      *   The conventional location for custom renderers is in `src/Error`. Your exception renderer needs to
      *   implement the `render()` method and return either a string or Http\Response.
      *   `errorRenderer` - string - The class responsible for rendering PHP errors. The selected
-     *   class will be used for both web and CLI contexts. If you want different classes for each environment 
+     *   class will be used for both web and CLI contexts. If you want different classes for each environment
      *   you'll need to write that conditional logic as well. Error renderers need to
      *   to implement the `Cake\Error\ErrorRendererInterface`.
      * - `skipLog` - array - List of exceptions to skip for logging. Exceptions that
      *   extend one of the listed exceptions will also be skipped for logging.
      *   E.g.:
      *   `'skipLog' => ['Cake\Http\Exception\NotFoundException', 'Cake\Http\Exception\UnauthorizedException']`
-     * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by 
+     * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by
      *   when a fatal error is encountered. This allows
      *   breathing room to complete logging or error handling.
      * - `ignoredDeprecationPaths` - array - A list of glob compatible file paths that deprecations
@@ -298,6 +298,12 @@ return [
             'persistent' => false,
             'timezone' => 'UTC',
 
+            'schema' => 'public',
+            'host' => 'db',
+            'username' => 'root',
+            'password' => 'secret',
+            'database' => 'inhouse-example',
+
             /*
              * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support, in CakePHP 3.6
              */
@@ -346,6 +352,11 @@ return [
             'quoteIdentifiers' => false,
             'log' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+            'schema' => 'public',
+            'host' => 'test-db',
+            'username' => 'root',
+            'password' => 'secret',
+            'database' => 'inhouse-example',
         ],
     ],
 

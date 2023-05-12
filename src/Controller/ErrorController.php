@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -16,7 +14,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
-use Cake\Event\EventInterface;
+use Cake\Event\Event;
 
 /**
  * Error Handling Controller
@@ -38,20 +36,20 @@ class ErrorController extends AppController
     /**
      * beforeFilter callback.
      *
-     * @param \Cake\Event\EventInterface $event Event.
+     * @param \Cake\Event\Event $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
     }
 
     /**
      * beforeRender callback.
      *
-     * @param \Cake\Event\EventInterface $event Event.
+     * @param \Cake\Event\Event $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeRender(EventInterface $event)
+    public function beforeRender(\Cake\Event\EventInterface $event)
     {
         parent::beforeRender($event);
 
@@ -61,10 +59,10 @@ class ErrorController extends AppController
     /**
      * afterFilter callback.
      *
-     * @param \Cake\Event\EventInterface $event Event.
+     * @param \Cake\Event\Event $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    public function afterFilter(EventInterface $event)
+    public function afterFilter(\Cake\Event\EventInterface $event)
     {
     }
 }

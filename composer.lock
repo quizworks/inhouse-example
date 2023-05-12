@@ -4,8 +4,142 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf4acc9af81e6ac2fc72dbbb514c2b0d",
+    "content-hash": "673b81be0ee0a469bc222825c221a701",
     "packages": [
+        {
+            "name": "cakephp/authentication",
+            "version": "2.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/authentication.git",
+                "reference": "643e17bcbbe2c5a01a5aaaa10d56df1a609ca6ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/authentication/zipball/643e17bcbbe2c5a01a5aaaa10d56df1a609ca6ab",
+                "reference": "643e17bcbbe2c5a01a5aaaa10d56df1a609ca6ab",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/http": "^4.4",
+                "laminas/laminas-diactoros": "^2.2.2",
+                "psr/http-client": "^1.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-handler": "^1.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp": "^4.4",
+                "cakephp/cakephp-codesniffer": "^4.0",
+                "firebase/php-jwt": "^6.2",
+                "phpunit/phpunit": "^8.5 || ^9.3"
+            },
+            "suggest": {
+                "cakephp/cakephp": "Install full core to use \"CookieAuthenticator\".",
+                "cakephp/orm": "To use \"OrmResolver\" (Not needed separately if using full CakePHP framework).",
+                "cakephp/utility": "Provides CakePHP security methods. Required for the JWT adapter and Legacy password hasher.",
+                "ext-ldap": "Make sure this php extension is installed and enabled on your system if you want to use the built-in LDAP adapter for \"LdapIdentifier\".",
+                "firebase/php-jwt": "If you want to use the JWT adapter add this dependency"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Authentication\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/authentication/graphs/contributors"
+                }
+            ],
+            "description": "Authentication plugin for CakePHP",
+            "homepage": "https://cakephp.org",
+            "keywords": [
+                "Authentication",
+                "auth",
+                "cakephp",
+                "middleware"
+            ],
+            "support": {
+                "docs": "https://book.cakephp.org/authentication/2/en/",
+                "forum": "https://stackoverflow.com/tags/cakephp",
+                "irc": "irc://irc.freenode.org/cakephp",
+                "issues": "https://github.com/cakephp/authentication/issues",
+                "source": "https://github.com/cakephp/authentication"
+            },
+            "time": "2023-03-17T16:13:23+00:00"
+        },
+        {
+            "name": "cakephp/authorization",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/authorization.git",
+                "reference": "3f9b514cba1cc588e04ee04286bd7a0228e83bb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/authorization/zipball/3f9b514cba1cc588e04ee04286bd7a0228e83bb2",
+                "reference": "3f9b514cba1cc588e04ee04286bd7a0228e83bb2",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/http": "^4.0",
+                "php": ">=7.2",
+                "psr/http-client": "^1.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-handler": "^1.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "require-dev": {
+                "cakephp/authentication": "^2.0",
+                "cakephp/bake": "^2.0",
+                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp-codesniffer": "^4.0",
+                "cakephp/plugin-installer": "^1.3",
+                "phpunit/phpunit": "^8.5 || ^9.3"
+            },
+            "suggest": {
+                "cakephp/http": "To use \"RequestPolicyInterface\" (Not needed separately if using full CakePHP framework).",
+                "cakephp/orm": "To use \"OrmResolver\" (Not needed separately if using full CakePHP framework)."
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Authorization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/authorization/graphs/contributors"
+                }
+            ],
+            "description": "Authorization abstraction layer plugin for CakePHP",
+            "keywords": [
+                "access",
+                "auth",
+                "authorization",
+                "cakephp"
+            ],
+            "support": {
+                "docs": "https://cakephp.org/authorization/2/en/",
+                "forum": "https://stackoverflow.com/tags/cakephp",
+                "irc": "irc://irc.freenode.org/cakephp",
+                "issues": "https://github.com/cakephp/authorization/issues",
+                "source": "https://github.com/cakephp/authorization"
+            },
+            "time": "2022-12-27T20:26:50+00:00"
+        },
         {
             "name": "cakephp/cakephp",
             "version": "4.4.13",
@@ -5862,7 +5996,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4"
+        "php": ">=7.4",
+        "ext-intl": "*",
+        "ext-mysql": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
