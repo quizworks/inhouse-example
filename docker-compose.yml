@@ -5,8 +5,11 @@ services:
       context: .
       dockerfile: './.docker/php/Dockerfile'
     working_dir: /application
+    command: ["bin/cake", "server", "-H", "0.0.0.0"]
     volumes:
       - ./:/application
+    ports:
+      - "8765:8765"
 
   composer:
     image: library/composer:2
@@ -14,4 +17,6 @@ services:
     volumes:
       - ./:/application
     entrypoint: [ 'composer', '--ignore-platform-reqs' ]
+    command:
+      - help
     user: "1000:1000"
