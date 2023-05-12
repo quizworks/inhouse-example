@@ -1,9 +1,17 @@
 version: "3.9"
 services:
+  php:
+    build:
+      context: .
+      dockerfile: './.docker/php/Dockerfile'
+    working_dir: /application
+    volumes:
+      - ./:/application
+
   composer:
     image: library/composer:2
     working_dir: /application
     volumes:
       - ./:/application
     entrypoint: [ 'composer', '--ignore-platform-reqs' ]
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "1000:1000"
