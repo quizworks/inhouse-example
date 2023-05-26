@@ -12,22 +12,22 @@ echo "==> Installing composer dependencies…"
 docker compose -f docker-compose.setup.yml run --rm composer install
 
 echo "==> Installing yarn dependencies…"
-docker compose -f docker-compose.setup.yml run --rm yarn install
+# docker compose -f docker-compose.setup.yml run --rm yarn install
 
 echo "==> Building assets…"
-docker compose -f docker-compose.setup.yml run --rm yarn run build
+# docker compose -f docker-compose.setup.yml run --rm yarn run build
 
 echo "==> Building docker containers…"
 docker compose build
 
 echo "==> Initializing database…"
-docker compose up -d disk_database
-while ! docker compose exec disk_database mysqladmin ping -s -h disk_database;
+docker compose up -d db
+while ! docker compose exec db mysqladmin ping -s -h disk_database;
 do
   echo waiting for database; sleep 1;
 done;
 
 docker compose run --rm php bin/cake migrations migrate
-docker compose stop disk_database
+docker compose stop db
 
 echo "==> App is now ready to go!"
