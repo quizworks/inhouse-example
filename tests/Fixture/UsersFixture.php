@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
@@ -27,7 +28,7 @@ class UsersFixture extends TestFixture
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'latin1_swedish_ci'
+            'collation' => 'utf8mb4_unicode_ci'
         ],
     ];
     // phpcs:enable
@@ -41,8 +42,8 @@ class UsersFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'email' => 'Lorem ipsum dolor sit amet',
-                'password' => 'Lorem ipsum dolor sit amet',
+                'email' => 'myname@example.com',
+                'password' => (new DefaultPasswordHasher())->hash('password'),
                 'created' => '2020-08-12 02:42:27',
                 'modified' => '2020-08-12 02:42:27',
             ],

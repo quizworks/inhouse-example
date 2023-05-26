@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -23,13 +25,14 @@ use Authorization\AuthorizationServiceInterface;
 use Authorization\AuthorizationServiceProviderInterface;
 use Authorization\Middleware\AuthorizationMiddleware;
 use Authorization\Policy\OrmResolver;
-use Psr\Http\Message\ServerRequestInterface;
 use Cake\Core\Configure;
+use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -37,8 +40,8 @@ use Cake\Routing\Router;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
-    implements AuthenticationServiceProviderInterface,
+class Application extends BaseApplication implements
+    AuthenticationServiceProviderInterface,
     AuthorizationServiceProviderInterface
 {
     /**
@@ -61,6 +64,7 @@ class Application extends BaseApplication
          */
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit', ['ignoreAuthorization' => true]);
+            Configure::write('DebugKit.ignoreAuthorization', true);
         }
 
         $this->addPlugin('Authentication');
@@ -117,6 +121,10 @@ class Application extends BaseApplication
         return $middlewareQueue;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @return AuthenticationServiceInterface
+     */
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
@@ -146,6 +154,10 @@ class Application extends BaseApplication
         return $authenticationService;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @return \Authorization\AuthorizationServiceInterface
+     */
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
         $resolver = new OrmResolver();

@@ -1,20 +1,31 @@
 <?php
+declare(strict_types=1);
+
 // src/Controller/ArticlesController.php
 
 namespace App\Controller;
 
-use App\Controller\AppController;
-
+/**
+ * @property-read \App\Model\Table\ArticlesTable $Articles
+ * @property-read \Authorization\AuthorizationServiceInterface $Authorization
+ */
 class ArticlesController extends AppController
 {
-    public function index()
+    /**
+     * @return void
+     */
+    public function index(): void
     {
         $this->Authorization->skipAuthorization();
         $articles = $this->paginate($this->Articles->find());
         $this->set(compact('articles'));
     }
 
-    public function view($slug)
+    /**
+     * @param $slug
+     * @return void
+     */
+    public function view($slug): void
     {
         $this->Authorization->skipAuthorization();
         $article = $this->Articles
@@ -24,6 +35,9 @@ class ArticlesController extends AppController
         $this->set(compact('article'));
     }
 
+    /**
+     * @return \Cake\Http\Response|void|null
+     */
     public function add()
     {
         $article = $this->Articles->newEmptyEntity();
@@ -37,6 +51,7 @@ class ArticlesController extends AppController
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your article.'));
@@ -44,6 +59,10 @@ class ArticlesController extends AppController
         $this->set('article', $article);
     }
 
+    /**
+     * @param $slug
+     * @return \Cake\Http\Response|void|null
+     */
     public function edit($slug)
     {
         $article = $this->Articles
@@ -55,10 +74,11 @@ class ArticlesController extends AppController
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
                 // Added: Disable modification of user_id.
-                'accessibleFields' => ['user_id' => false]
+                'accessibleFields' => ['user_id' => false],
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -72,6 +92,10 @@ class ArticlesController extends AppController
         $this->set('article', $article);
     }
 
+    /**
+     * @param $slug
+     * @return \Cake\Http\Response|void|null
+     */
     public function delete($slug)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -81,11 +105,15 @@ class ArticlesController extends AppController
 
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
     }
 
-    public function tags()
+    /**
+     * @return void
+     */
+    public function tags(): void
     {
         $this->Authorization->skipAuthorization();
 
@@ -95,13 +123,13 @@ class ArticlesController extends AppController
 
         // Use the ArticlesTable to find tagged articles.
         $articles = $this->Articles->find('tagged', [
-            'tags' => $tags
+            'tags' => $tags,
         ]);
 
         // Pass variables into the view template context.
         $this->set([
             'articles' => $articles,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 }

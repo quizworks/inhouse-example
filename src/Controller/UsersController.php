@@ -1,18 +1,22 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Event\EventInterface;
 
 /**
  * Users Controller
  *
  * @property \App\Model\Table\UsersTable $Users
- *
  * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController
 {
+    /**
+     * @param \Cake\Event\EventInterface $event
+     * @return void
+     */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -33,7 +37,11 @@ class UsersController extends AppController
         $this->set('_serialize', ['users']);
     }
 
-    public function login() {
+    /**
+     * @return \Cake\Http\Response|void|null
+     */
+    public function login()
+    {
         $this->Authorization->skipAuthorization();
 
         $this->request->allowMethod(['get', 'post']);
@@ -54,6 +62,9 @@ class UsersController extends AppController
         }
     }
 
+    /**
+     * @return \Cake\Http\Response|void|null
+     */
     public function logout()
     {
         $this->Authorization->skipAuthorization();
@@ -62,6 +73,7 @@ class UsersController extends AppController
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }
@@ -76,7 +88,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Articles']
+            'contain' => ['Articles'],
         ]);
 
         $this->set('user', $user);
@@ -116,7 +128,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
