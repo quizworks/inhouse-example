@@ -1,0 +1,11 @@
+{
+  debug
+}
+
+inhouse.test-easy-lms.com {
+        reverse_proxy http://localhost:80
+}
+
+portainer.test-easy-lms.com {
+        reverse_proxy http://portainer:9000
+}

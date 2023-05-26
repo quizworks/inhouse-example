@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  caddy:
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - .data/caddy/config:/config
+      - .data/caddy/data:/data
+
+  portainer:
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .data/portainer:/data
