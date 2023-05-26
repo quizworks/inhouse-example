@@ -60,8 +60,9 @@ class Application extends BaseApplication
          * Debug Kit should not be installed on a production system
          */
         if (Configure::read('debug')) {
-            $this->addPlugin('DebugKit');
+            $this->addPlugin('DebugKit', ['ignoreAuthorization' => true]);
         }
+
         $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
 
@@ -112,16 +113,6 @@ class Application extends BaseApplication
 
             // Add authorization **after** authentication
             ->add(new AuthorizationMiddleware($this));
-
-        if (Configure::read('debug')) {
-            // Disable authz for debugkit
-            $middlewareQueue->add(function ($req, $res, $next) {
-                if ($req->getParam('plugin') === 'DebugKit') {
-                    $req->getAttribute('authorization')->skipAuthorization();
-                }
-                return $next($req, $res);
-            });
-        }
 
         return $middlewareQueue;
     }
