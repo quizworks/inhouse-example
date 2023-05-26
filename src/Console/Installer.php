@@ -70,7 +70,7 @@ class Installer
     }
 
     /**
-     * Create config/app_local.php file if it does not exist.
+     * Create config/app.php file if it does not exist.
      *
      * @param string $dir The application's root directory.
      * @param \Composer\IO\IOInterface $io IO interface to write to console.
@@ -78,11 +78,11 @@ class Installer
      */
     public static function createAppLocalConfig($dir, $io)
     {
-        $appLocalConfig = $dir . '/config/app_local.php';
-        $appLocalConfigTemplate = $dir . '/config/app_local.example.php';
+        $appLocalConfig = $dir . '/config/app.php';
+        $appLocalConfigTemplate = $dir . '/config/app.example.php';
         if (!file_exists($appLocalConfig)) {
             copy($appLocalConfigTemplate, $appLocalConfig);
-            $io->write('Created `config/app_local.php` file');
+            $io->write('Created `config/app.php` file');
         }
     }
 
@@ -180,7 +180,7 @@ class Installer
     public static function setSecuritySalt($dir, $io)
     {
         $newKey = hash('sha256', Security::randomBytes(64));
-        static::setSecuritySaltInFile($dir, $io, $newKey, 'app_local.php');
+        static::setSecuritySaltInFile($dir, $io, $newKey, 'app.php');
     }
 
     /**
