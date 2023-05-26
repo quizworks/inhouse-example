@@ -1,0 +1,9 @@
+#!/bin/bash
+# strta/server: Launch the application and any extra required processes
+#                locally.
+set -euo pipefail
+shopt -s inherit_errexit
+
+echo "==> Starting environment..."
+docker compose up -d php disk_database
+echo "==> App is now running! Visit http://localhost:8765 in your browser to see it."

@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  composer:
+    image: library/composer:2
+    working_dir: /application
+    volumes:
+      - ./:/application
+      - $HOME/.composer:/tmp
+      - ${SSH_AUTH_SOCK:-no-agent}:/ssh-auth.sock
+    entrypoint: [ 'composer', '--ignore-platform-reqs' ]
+    command:
+      - help
+    user: "1000:1000"
+    environment:
+      SSH_AUTH_SOCK: /ssh-auth.sock
+      GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+  yarn:
+    image: node:14
+    volumes:
+      - ./:/app
+    working_dir: /app/scripts
+    entrypoint:
+      - yarn
+    user: '1000:1000'

@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   php:
     build:
@@ -18,8 +18,6 @@ services:
       MYSQL_DATABASE: 'inhouse-example'
     volumes:
       - ./.docker/data/db:/var/lib/mysql
-    ports:
-      - "33065:3306"
 
   test-db:
     image: mysql:8
@@ -29,12 +27,3 @@ services:
       MYSQL_ROOT_PASSWORD: 'secret'
       MYSQL_DATABASE: 'inhouse-example'
 
-  composer:
-    image: library/composer:2
-    working_dir: /application
-    volumes:
-      - ./:/application
-    entrypoint: [ 'composer', '--ignore-platform-reqs' ]
-    command:
-      - help
-    user: "1000:1000"

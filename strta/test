@@ -1,0 +1,15 @@
+#!/bin/bash
+# strta/test: Run test suite for application.
+set -euo pipefail
+shopt -s inherit_errexit
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+
+docker compose up -d memory_database
+while ! docker compose exec memory_database mysqladmin ping -s -h memory_database;
+do
+  echo waiting for database; sleep 1;
+done;
+
+echo "==> Running tests…"
+docker compose run --rm php composer test
+echo "==> Testing is now done!"
