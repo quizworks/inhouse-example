@@ -4,8 +4,8 @@ set -euo pipefail
 shopt -s inherit_errexit
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
-docker compose up -d memory_database
-while ! docker compose exec memory_database mysqladmin ping -s -h memory_database;
+docker compose up -d test-db
+while ! docker compose exec test-db mysqladmin ping -s -h test-db;
 do
   echo waiting for database; sleep 1;
 done;
