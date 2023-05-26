@@ -5,5 +5,5 @@ set -euo pipefail
 shopt -s inherit_errexit
 
 echo "==> Starting environment..."
-docker compose up -d php disk_database
+docker compose up -d php db
 echo "==> App is now running! Visit http://localhost:8765 in your browser to see it."
