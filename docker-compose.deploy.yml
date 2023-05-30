@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+#  webserver:
+#    image: ${account}.dkr.ecr.${region}.amazonaws.com/dashboard/webserver:${TAG:-latest}
+#    build:
+#      target: deploy
+
+  php:
+    image: easy-lms/inhouse-example-php:${TAG:-latest}
+#    image: ${account}.dkr.ecr.${region}.amazonaws.com/dashboard/php:${TAG:-latest}
+    build:
+      target: deploy

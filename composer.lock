@@ -5998,7 +5998,7 @@
     "platform": {
         "php": ">=7.4",
         "ext-intl": "*",
-        "ext-mysql": "*"
+        "ext-pdo_mysql": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# TODO set tag
+# TODO set registry
+docker compose -f docker-compose.yml -f docker-compose.deploy.yml build

@@ -3,6 +3,7 @@ services:
   php:
     build:
       context: .
+      target: base
       dockerfile: './.docker/php/Dockerfile'
     working_dir: /application
     command: ["bin/cake", "server", "-H", "0.0.0.0"]

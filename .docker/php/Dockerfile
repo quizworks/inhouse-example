@@ -11,3 +11,15 @@ RUN apt-get update \
       php8.1-intl \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
+
+FROM base AS deploy
+COPY --chown=www-data:www-data ./composer.json /application/
+COPY --chown=www-data:www-data ./composer.lock /application/
+RUN composer install --no-dev --no-interaction --optimize-autoloader --no-progress --no-scripts --prefer-dist
+COPY --chown=www-data:www-data ./src /application/src
+COPY --chown=www-data:www-data ./plugins /application/plugins
+COPY --chown=www-data:www-data ./config /application/config
+COPY --chown=www-data:www-data ./templates /application/templates
+COPY --chown=www-data:www-data ./webroot/index.php /application/webroot/index.php
+RUN mkdir -p /application/tmp && chown -R www-data:www-data /application/tmp
+RUN mkdir -p /application/logs && chown -R www-data:www-data /application/logs
