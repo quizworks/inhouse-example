@@ -17,6 +17,7 @@ COPY --chown=www-data:www-data ./composer.json /application/
 COPY --chown=www-data:www-data ./composer.lock /application/
 RUN composer install --no-dev --no-interaction --optimize-autoloader --no-progress --no-scripts --prefer-dist
 COPY --chown=www-data:www-data ./src /application/src
+COPY --chown=www-data:www-data ./bin /application/bin
 COPY --chown=www-data:www-data ./plugins /application/plugins
 COPY --chown=www-data:www-data ./config /application/config
 COPY --chown=www-data:www-data ./config/app.production.php /application/config/app.php
