@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  webserver:
+    image: ghcr.io/${ACCOUNT}/webserver:${TAG}
+  php:
+    image: ghcr.io/${ACCOUNT}/php:${TAG}
+    build:
+      target: deploy
+    command: [ "bin/cake", "migrations", "migrate", "&&", "bin/cake", "server", "-H", "0.0.0.0" ]
+    environment:
+      SECURITY_SALT: $SECURITY_SALT
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+    volumes:
+      - .data/db:/var/lib/mysql
