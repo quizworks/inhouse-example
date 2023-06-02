@@ -18,6 +18,6 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
       - name: Build images and push
         run: |
-          ACCOUNT=$(echo ${{ github.repository_owner }} | tr '[A-Z]' '[a-z]')
+          ACCOUNT=$(echo "${{ github.repository_owner }}" | tr '[A-Z]' '[a-z]')
           TAG=${{ github.sha }}
           ./strta/cdbuild

@@ -12,19 +12,3 @@ services:
     ports:
       - "8765:8765"
 
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: 'secret'
-      MYSQL_DATABASE: 'inhouse-example'
-    volumes:
-      - ./.docker/data/db:/var/lib/mysql
-
-  test-db:
-    image: mysql:8
-    tmpfs:
-      /var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 'secret'
-      MYSQL_DATABASE: 'inhouse-example'
-
