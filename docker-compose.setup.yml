@@ -10,7 +10,7 @@ services:
     entrypoint: [ 'composer', '--ignore-platform-reqs' ]
     command:
       - help
-    user: "1000:1000"
+    user: '${UID:-1000}:${GID:-1000}'
     environment:
       SSH_AUTH_SOCK: /ssh-auth.sock
       GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
@@ -22,4 +22,4 @@ services:
     working_dir: /app/scripts
     entrypoint:
       - yarn
-    user: '1000:1000'
+    user: '${UID:-1000}:${GID:-1000}'
