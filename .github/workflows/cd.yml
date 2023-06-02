@@ -21,3 +21,5 @@ jobs:
           export ACCOUNT=$(echo "${{ github.repository_owner }}" | tr '[A-Z]' '[a-z]')
           export TAG=${{ github.sha }}
           ./strta/cdbuild
+          export TAG=latest
+          ./strta/cdbuild
