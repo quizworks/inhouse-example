@@ -4,6 +4,15 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
+echo "==> Initializing database…"
+docker compose up -d db
+while ! docker compose exec db mysqladmin ping -s -h db;
+do
+  echo waiting for database; sleep 1;
+done;
+
+docker compose run --rm php bin/cake migrations migrate
+
 echo "==> Starting environment..."
 docker compose up -d php db
 echo "==> App is now running! Visit http://localhost:8765 in your browser to see it."

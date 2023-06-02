@@ -34,6 +34,6 @@ class PagesControllerTest extends TestCase
     public function testRedirectToLogin()
     {
         $this->get('/');
-        $this->assertResponseCode(302);
+        $this->assertResponseCode(301);
     }
 }
