@@ -1,13 +1,28 @@
-name: CD
+name: Continuous Integration and Deployment
 
 on:
   push:
     branches:
       - 'master'
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
+  Test:
+    runs-on: ubuntu-latest
+    env:
+      UID: 1001 # Runner
+      GID: 121  # Docker
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build containers for testing
+      run: ./strta/setup
+    - name: Run tests
+      run: ./strta/test
   Deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'ref/heads/master' }}
     env:
       UID: 1001 # Runner
       GID: 121  # Docker
@@ -23,3 +38,4 @@ jobs:
           ./strta/cdbuild
           export TAG=latest
           ./strta/cdbuild
+
