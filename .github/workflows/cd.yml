@@ -1,0 +1,23 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    env:
+      UID: 1001 # Runner
+      GID: 121  # Docker
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to registry
+        # This is where you will update the personal access token to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Build images and push
+        run: |
+          ACCOUNT=$(echo ${{ github.repository_owner }} | tr '[A-Z]' '[a-z]')
+          TAG=${{ github.sha }}
+          ./strta/cdbuild

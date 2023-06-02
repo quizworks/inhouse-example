@@ -6,7 +6,6 @@ services:
 #      target: deploy
 
   php:
-    image: easy-lms/inhouse-example-php:${TAG:-latest}
-#    image: ${account}.dkr.ecr.${region}.amazonaws.com/dashboard/php:${TAG:-latest}
+    image: ghcr.io/${ACCOUNT}/php:${TAG:-latest}
     build:
       target: deploy
