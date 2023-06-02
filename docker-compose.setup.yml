@@ -16,7 +16,7 @@ services:
       GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
   yarn:
-    image: node:14
+    image: node:18
     volumes:
       - ./:/app
     working_dir: /app/scripts
