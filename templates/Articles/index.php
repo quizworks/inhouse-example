@@ -1,6 +1,6 @@
 <!-- File: src/Template/Articles/index.php -->
 <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
-<h1>Articles</h1>
+<h1>Articles (Updated)</h1>
 <table>
     <tr>
         <th>Title</th>
