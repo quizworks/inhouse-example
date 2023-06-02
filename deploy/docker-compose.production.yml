@@ -2,6 +2,9 @@ version: '3.9'
 services:
   webserver:
     image: ghcr.io/${ACCOUNT}/webserver:${TAG}
+    networks:
+      - default
+      - proxy
   php:
     image: ghcr.io/${ACCOUNT}/php:${TAG}
     build:
@@ -19,3 +22,7 @@ services:
       MYSQL_DATABASE: $DB_NAME
     volumes:
       - .data/db:/var/lib/mysql
+
+networks:
+  proxy:
+    external: true
