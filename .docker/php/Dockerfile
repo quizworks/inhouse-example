@@ -19,6 +19,7 @@ RUN composer install --no-dev --no-interaction --optimize-autoloader --no-progre
 COPY --chown=www-data:www-data ./src /application/src
 COPY --chown=www-data:www-data ./plugins /application/plugins
 COPY --chown=www-data:www-data ./config /application/config
+COPY --chown=www-data:www-data ./config/app.production.php /application/config/app.php
 COPY --chown=www-data:www-data ./templates /application/templates
 COPY --chown=www-data:www-data ./webroot/index.php /application/webroot/index.php
 RUN mkdir -p /application/tmp && chown -R www-data:www-data /application/tmp
