@@ -3,7 +3,7 @@
 }
 
 inhouse.test-easy-lms.com {
-        reverse_proxy http://localhost:80
+        reverse_proxy http://webserver:80
 }
 
 portainer.test-easy-lms.com {
