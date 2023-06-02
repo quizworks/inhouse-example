@@ -6,7 +6,7 @@ services:
     volumes:
       - ./:/application
       - $HOME/.composer:/tmp
-      - ${SSH_AUTH_SOCK:-no-agent}:/ssh-auth.sock
+      - ${SSH_AUTH_SOCK:-/tmp/no-agent.sock}:/ssh-auth.sock
     entrypoint: [ 'composer', '--ignore-platform-reqs' ]
     command:
       - help
