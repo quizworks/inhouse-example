@@ -22,7 +22,8 @@ jobs:
       run: ./strta/test
   Deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'ref/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: [Test]
     env:
       UID: 1001 # Runner
       GID: 121  # Docker
