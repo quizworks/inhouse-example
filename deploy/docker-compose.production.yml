@@ -6,7 +6,6 @@ services:
     image: ghcr.io/${ACCOUNT}/php:${TAG}
     build:
       target: deploy
-    command: [ "bin/cake", "migrations", "migrate", "&&", "bin/cake", "server", "-H", "0.0.0.0" ]
     environment:
       SECURITY_SALT: $SECURITY_SALT
       DB_HOST: $DB_HOST
