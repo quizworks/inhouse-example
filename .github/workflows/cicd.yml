@@ -12,16 +12,11 @@ permissions:
   contents: read
 
 jobs:
-  CI:
+  Tests:
     runs-on: ubuntu-22.04
-
     steps:
     - uses: actions/checkout@v3
-
-    - name: Build
+    - name: Build & run tests
       run: |
         ./strta/setup
-
-    - name: Tests
-      run: |
         ./strta/test
