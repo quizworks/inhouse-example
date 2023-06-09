@@ -6,9 +6,3 @@ services:
     image: ghcr.io/${ACCOUNT}/php:${TAG:-latest}
     build:
       target: deploy
-    environment:
-      SECURITY_SALT: cpwtq871ulgrpovmqctpvocty7mgofolpng3duca71xikas6b5c27s825b0nk42z
-      DB_HOST: db
-      DB_USER: root
-      DB_PASSWORD: secret
-      DB_NAME: inhouse-example
