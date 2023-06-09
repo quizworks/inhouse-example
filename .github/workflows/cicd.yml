@@ -40,6 +40,9 @@ jobs:
           export TAG=latest
           ./strta/cdbuild
       - name: Pull images on production
+        env:
+          PORTAINER_USER: ${{ secrets.PORTAINER_USER }}
+          PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
         run: |
           JWT=$(curl -f -X POST --location "https://portainer.test-easy-lms.com/api/auth" -H "Content-Type: Application/json" -d "{\"Username\": \"$PORTAINER_USER\", \"Password\": \"$PORTAINER_PASSWORD\"}" | jq -r .jwt)
           curl -f -X PUT --location "https://portainer.test-easy-lms.com/api/stacks/9/git/redeploy?endpointId=2" \
