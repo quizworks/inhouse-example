@@ -39,4 +39,8 @@ jobs:
           ./strta/cdbuild
           export TAG=latest
           ./strta/cdbuild
+      - name: Pull images on production
+        run: |
+          export JWT=$(curl -X POST --location "https://portainer.test-easy-lms.com/api/auth" -H "Content-Type: Application/json" -d "{\"Username\": \"$PORTAINER_USER\", \"Password\": \"$PORTAINER_PASSWORD\"}" | jq -r .jwt)
+          curl -X POST --location "https://portainer.test-easy-lms.com/api/stacks/9" -H "Authorization: Bearer $JWT" -H "Content-Type: Application/json" -d "{\"prune\": false, \"pullImage\": true}"
 
